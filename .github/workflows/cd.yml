@@ -4,17 +4,10 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
-    inputs:
-      runApply:
-        description: 'Run Terraform Apply? (true/false)' 
-        required: true
-        default: 'false'
-
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  plan:
+    name: 'Terraform Plan'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -38,11 +31,44 @@ jobs:
         cd terraform
         terraform plan -out planfile.tfplan -var-file ./environments/terraform.tfvars.json
 
+    - name: Upload plan file
+      uses: actions/upload-artifact@v2
+      with:
+        name: planfile
+        path: terraform/planfile.tfplan
+
+  apply:
+    name: 'Terraform Apply'
+    if: github.event.inputs.runApply == 'true'
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Init
+      run: |
+        cd terraform
+        terraform init -backend-config ./environments/backend.tfvars
+
+    - name: Terraform Validate
+      run: |
+        cd terraform
+        terraform validate
+
+    - name: Download plan file
+      uses: actions/download-artifact@v2
+      with:
+        name: planfile
+        path: terraform
+
     - name: Terraform Apply
       run: |
         cd terraform
         terraform apply planfile.tfplan -auto-approve
-      if: github.event.inputs.runApply == 'true'
 
 env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}  
