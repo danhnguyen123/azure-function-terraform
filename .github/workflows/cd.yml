@@ -18,25 +18,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Change directory
-      run: cd terraform
-
     - name: Terraform Init
-      run: terraform init -backend-config ./environments/backend.tfvars
+      run: |
+        cd terraform
+        terraform init -backend-config ./environments/backend.tfvars
 
     - name: Terraform Validate
-      run: terraform validate
+      run: |
+        cd terraform
+        terraform validate
 
     - name: Terraform Plan
-      run: terraform plan -out planfile.tfplan -var-file ./environments/terraform.tfvars.json
+      run: |
+        cd terraform
+        terraform plan -out planfile.tfplan -var-file ./environments/terraform.tfvars.json
 
     - name: Terraform Apply
-      run: terraform apply planfile.tfplan -auto-approve
+      run: |
+        cd terraform
+        terraform apply planfile.tfplan -auto-approve
       if: github.event.inputs.runApply == 'true'
 
 env:
