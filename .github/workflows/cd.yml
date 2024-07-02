@@ -79,7 +79,7 @@ jobs:
     - name: Terraform Apply
       run: |
         cd terraform
-        terraform apply planfile.tfplan -auto-approve
+        terraform apply -auto-approve planfile.tfplan 
 
 env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}  
