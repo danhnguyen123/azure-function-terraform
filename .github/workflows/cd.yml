@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       runApply:
-        description: 'Run Terraform Apply? (true/false)' 
+        description: 'Run Terraform Apply? (True/False)' 
         required: true
         type: choice
         default: 'False'
