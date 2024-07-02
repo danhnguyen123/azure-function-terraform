@@ -11,7 +11,7 @@ Project to spin up Azure services by following this flow:
   - [Setup](#setup)
     - [Creating a Service Principal in the Azure Portal](#create-service-principal)
     - [Configuring the Service Principal in Terraform](#config-service-princial-in-terraform)
-  - [Provisioning](#provisioning)
+  - [Provision](#provision)
     - [Terraform Init](#terraform-init)
     - [Terraform Validate](#terraform-validate)
     - [Terraform Plan](#terraform-plan)
@@ -63,12 +63,12 @@ We use Python programming model V1 for simple syntax ([Read more about programmi
 
 ### Terraform structure
 
-We will provision some Azure resources (we also put Terraform file ib separated module folder for each resources):
+We will provisioning some Azure resources (we also put Terraform file ib separated module folder for each resources):
 
-* [Azure Function App](./terraform/modules/function_app): Provision Azure Function App and some resources for it
-* [Azure Key Vault](./terraform/modules/key_vault): Provision Azure Key Vault, we will store sensitive credentials and expose them to environment variables in Azure Function
-* [Azure Storage Account](./terraform/modules/storage_account): Provision Azure Storage Account to store file, we also grant permssion Azure Fuction App to communicate with Storage Account by identidy
-* [Azure Eventgrid](./terraform/modules/event_grid): Provision Azure Eventgrid topic and subscription, the subscription will trigger function [my_eventgrid_trigger](./src/exchange-rate-crawler/my_eventgrid_trigger)
+* [Azure Function App](./terraform/modules/function_app): Provisioning Azure Function App and some resources for it
+* [Azure Key Vault](./terraform/modules/key_vault): Provisioning Azure Key Vault, we will store sensitive credentials and expose them to environment variables in Azure Function
+* [Azure Storage Account](./terraform/modules/storage_account): Provisioning Azure Storage Account to store file, we also grant permssion Azure Fuction App to communicate with Storage Account by identidy
+* [Azure Eventgrid](./terraform/modules/event_grid): Provisioning Azure Eventgrid topic and subscription, the subscription will trigger function [my_eventgrid_trigger](./src/exchange-rate-crawler/my_eventgrid_trigger)
 
 
 ```bash
@@ -99,7 +99,7 @@ We will provision some Azure resources (we also put Terraform file ib separated 
 
 ## Setup
 
-In order to run the project you'll need to preprare the credential for Terraform to provision resources in Azure
+In order to run the project you'll need to preprare the credential for Terraform to provisioning resources in Azure
 Terraform offer some of ways to get it, in this project we will authenticate Azure using a [Service Principal with a Client Secret](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret)
  
 ### Creating a Service Principal in the Azure Portal
@@ -122,7 +122,7 @@ Terraform can use these environement variables to authenciate with Azure
 You can read more by address this guide [Configuring the Service Principal in Terraform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret#configuring-the-service-principal-in-terraform)
 
 
-## Provisioning
+## Provision
 
 We will run Terraform command to create resources in Azure
  
