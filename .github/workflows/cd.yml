@@ -5,6 +5,17 @@ on:
     branches:
       - master
 
+  workflow_dispatch:
+    inputs:
+      runApply:
+        description: 'Run Terraform Apply? (true/false)' 
+        required: true
+        type: choice
+        default: 'False'
+        options:
+          - 'True'
+          - 'False'
+
 jobs:
   plan:
     name: 'Terraform Plan'
@@ -39,7 +50,7 @@ jobs:
 
   apply:
     name: 'Terraform Apply'
-    if: github.event.inputs.runApply == 'true'
+    if: github.event.inputs.runApply == 'True'
     needs: plan
     runs-on: ubuntu-latest
     steps:
