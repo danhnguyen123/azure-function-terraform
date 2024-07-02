@@ -65,11 +65,11 @@ In this repo we will use Python 3.10 ([Azure Function Python config](./terraform
 
 ### Terraform structure
 
-We will provisioning some Azure resources (we also put Terraform file ib separated module folder for each resources):
+We will provisioning some Azure resources (we also put Terraform file in separated module folder for each resources):
 
 * [Azure Function App](./terraform/modules/function_app): Provisioning Azure Function App and some resources for it
 * [Azure Key Vault](./terraform/modules/key_vault): Provisioning Azure Key Vault, we will store sensitive credentials and expose them to environment variables in Azure Function
-* [Azure Storage Account](./terraform/modules/storage_account): Provisioning Azure Storage Account to store file, we also grant permssion Azure Fuction App to communicate with Storage Account by identidy
+* [Azure Storage Account](./terraform/modules/storage_account): Provisioning Azure Storage Account to store file, we also grant permssion Azure Fuction App to communicate with Storage Account by identity
 * [Azure Eventgrid](./terraform/modules/event_grid): Provisioning Azure Eventgrid topic and subscription, the subscription will trigger function [my_eventgrid_trigger](./src/exchange-rate-crawler/my_eventgrid_trigger)
 
 
