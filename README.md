@@ -33,6 +33,8 @@ In this project we have two main folder: `src` for Python code and `terraform` f
 
 We use Python programming model V1 for simple syntax ([Read more about programming model](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=wsgi%2Capplication-level&pivots=python-mode-configuration))
 
+In this repo we will use Python 3.10 ([Azure Function Python config](./terraform/modules/function_app/main.tf#L62))
+
 `src` folder structure:
 
 ```bash
